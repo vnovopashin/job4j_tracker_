@@ -9,6 +9,8 @@ import ru.job4j.tracker.input.MockInput;
 import ru.job4j.tracker.output.Output;
 import ru.job4j.tracker.output.StubOutput;
 
+import java.util.List;
+
 import static org.assertj.core.api.Assertions.assertThat;
 
 class FindAllActionTest {
@@ -21,10 +23,10 @@ class FindAllActionTest {
         Input input = new MockInput(
                 new String[]{"0", "1"}
         );
-        UserAction[] actions = new UserAction[]{
+        List<UserAction> actions = List.of(
                 new FindAllAction(output),
                 new ExitAction(output)
-        };
+        );
         new StartUI(output).init(input, tracker, actions);
         String ln = System.lineSeparator();
         assertThat(output.toString()).isEqualTo(
