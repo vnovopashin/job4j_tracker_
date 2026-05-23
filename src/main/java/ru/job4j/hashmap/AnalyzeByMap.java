@@ -14,7 +14,16 @@ public class AnalyzeByMap {
      * @return средний балл
      */
     public static double averageScore(List<Pupil> pupils) {
-        return 0D;
+        double sum = 0;
+        int count = 0;
+        for (Pupil pupil : pupils) {
+            List<Subject> subjects = pupil.subjects();
+            count += subjects.size();
+            for (Subject subject : subjects) {
+                sum += subject.score();
+            }
+        }
+        return sum / count;
     }
 
     /**
