@@ -1,5 +1,6 @@
 package ru.job4j.hashmap;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -35,7 +36,17 @@ public class AnalyzeByMap {
      * @return средний балл по каждому ученику
      */
     public static List<Label> averageScoreByPupil(List<Pupil> pupils) {
-        return List.of();
+        List<Label> result = new ArrayList<>();
+        for (Pupil pupil : pupils) {
+            String name = pupil.name();
+            double sum = 0;
+            for (Subject subject : pupil.subjects()) {
+                sum += subject.score();
+            }
+            double avg = sum / pupils.size();
+            result.add(new Label(name, avg));
+        }
+        return result;
     }
 
     /**

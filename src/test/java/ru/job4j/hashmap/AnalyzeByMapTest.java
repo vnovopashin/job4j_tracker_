@@ -37,7 +37,6 @@ class AnalyzeByMapTest {
         assertThat(average).isCloseTo(74.44, offset(0.01D));
     }
 
-    @Disabled
     @Test
     public void whenListOfPupilAverage() {
         List<Label> average = AnalyzeByMap.averageScoreByPupil(
