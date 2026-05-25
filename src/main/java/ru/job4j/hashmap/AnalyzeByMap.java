@@ -1,6 +1,7 @@
 package ru.job4j.hashmap;
 
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
 
 /**
@@ -70,7 +71,17 @@ public class AnalyzeByMap {
      * @return лучший ученик
      */
     public static Label bestStudent(List<Pupil> pupils) {
-        return null;
+        List<Label> result = new ArrayList<>();
+        for (Pupil pupil : pupils) {
+            String name = pupil.name();
+            double sum = 0;
+            for (Subject subject : pupil.subjects()) {
+                sum += subject.score();
+            }
+            result.add(new Label(name, sum));
+        }
+        result.sort(Comparator.reverseOrder());
+        return result.get(0);
     }
 
     /**

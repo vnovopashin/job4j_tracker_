@@ -106,7 +106,6 @@ class AnalyzeByMapTest {
         ));
     }
 
-    @Disabled
     @Test
     public void whenBestPupil() {
         Label best = AnalyzeByMap.bestStudent(
