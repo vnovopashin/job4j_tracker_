@@ -71,6 +71,7 @@ public class AnalyzeByMap {
         if (pupils == null || pupils.isEmpty()) {
             return new ArrayList<>();
         }
+
         Map<String, Integer> sumBySubject = new HashMap<>();
         Map<String, Integer> countBySubject = new HashMap<>();
 
@@ -78,10 +79,11 @@ public class AnalyzeByMap {
             for (Subject subject : pupil.subjects()) {
                 String name = subject.name();
                 int score = subject.score();
-                sumBySubject.put(name, sumBySubject.getOrDefault(name, 0) + score);
-                countBySubject.put(name, countBySubject.getOrDefault(name, 0) + 1);
+                sumBySubject.merge(name, score, Integer::sum);
+                countBySubject.merge(name, 1, Integer::sum);
             }
         }
+
         List<Label> result = new ArrayList<>();
         for (Map.Entry<String, Integer> entry : sumBySubject.entrySet()) {
             String subjectName = entry.getKey();
@@ -136,7 +138,7 @@ public class AnalyzeByMap {
             for (Subject subject : pupil.subjects()) {
                 String name = subject.name();
                 int score = subject.score();
-                totalBySubject.put(name, totalBySubject.getOrDefault(name, 0) + score);
+                totalBySubject.merge(name, score, Integer::sum);
             }
         }
         String bestSubjectName = null;
@@ -148,7 +150,6 @@ public class AnalyzeByMap {
                 bestSubjectName = entry.getKey();
             }
         }
-
         return new Label(bestSubjectName, maxTotal);
     }
 }
