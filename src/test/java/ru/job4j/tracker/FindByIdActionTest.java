@@ -17,7 +17,7 @@ class FindByIdActionTest {
     @Test
     void whenFindByIdItemTestOutputIsSuccessfully() {
         Output output = new StubOutput();
-        Tracker tracker = new Tracker();
+        MemTracker tracker = new MemTracker();
         Item one = tracker.add(new Item("test1"));
         Input input = new MockInput(
                 new String[]{"0", String.valueOf(one.getId()), "1"}
