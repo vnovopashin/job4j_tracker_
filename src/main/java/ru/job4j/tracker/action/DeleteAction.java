@@ -1,10 +1,9 @@
 package ru.job4j.tracker.action;
 
 import ru.job4j.tracker.Item;
-import ru.job4j.tracker.MemTracker;
-import ru.job4j.tracker.Store;
 import ru.job4j.tracker.input.Input;
 import ru.job4j.tracker.output.Output;
+import ru.job4j.tracker.store.Store;
 
 public class DeleteAction implements UserAction {
     private final Output output;
