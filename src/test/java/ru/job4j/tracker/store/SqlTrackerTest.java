@@ -55,4 +55,46 @@ public class SqlTrackerTest {
         tracker.add(item);
         assertThat(tracker.findById(item.getId())).isEqualTo(item);
     }
+
+    @Test
+    public void whenTestFindAll() {
+        SqlTracker tracker = new SqlTracker(connection);
+        Item item = new Item("item");
+        Item item2 = new Item("item2");
+        tracker.add(item);
+        tracker.add(item2);
+        assertThat(tracker.findAll()).containsExactly(item, item2);
+    }
+
+    @Test
+    public void whenTestFindByName() {
+        SqlTracker tracker = new SqlTracker(connection);
+        Item item = new Item("item");
+        Item item2 = new Item("item2");
+        Item item3 = new Item("item");
+        tracker.add(item);
+        tracker.add(item2);
+        tracker.add(item3);
+        assertThat(tracker.findByName("item"))
+                .containsExactly(item, item3)
+                .hasSize(2);
+    }
+
+    @Test
+    public void whenTestReplace() {
+        SqlTracker tracker = new SqlTracker(connection);
+        Item item = new Item("item");
+        tracker.add(item);
+        tracker.replace(item.getId(), new Item("new_item"));
+        assertThat(tracker.findById(item.getId()).getName()).isEqualTo("new_item");
+    }
+
+    @Test
+    public void whenTestDelete() {
+        SqlTracker tracker = new SqlTracker(connection);
+        Item item = new Item("item");
+        tracker.add(item);
+        tracker.delete(item.getId());
+        assertThat(tracker.findById(item.getId())).isNull();
+    }
 }
