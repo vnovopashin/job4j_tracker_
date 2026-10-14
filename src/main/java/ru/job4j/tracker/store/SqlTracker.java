@@ -1,4 +1,6 @@
-package ru.job4j.tracker;
+package ru.job4j.tracker.store;
+
+import ru.job4j.tracker.Item;
 
 import java.io.InputStream;
 import java.sql.*;
@@ -82,6 +84,7 @@ public class SqlTracker implements Store {
         try (PreparedStatement statement =
                      connection.prepareStatement("DELETE FROM items WHERE id = ?")) {
             statement.setInt(1, id);
+            statement.executeUpdate();
         } catch (Exception e) {
             throw new IllegalStateException(e);
         }
